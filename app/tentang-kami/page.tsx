@@ -7,15 +7,15 @@ export const metadata: Metadata = {
 export default function TentangKami() {
   return (
     <main>
-      <section className="hero-sub" style={{background: 'linear-gradient(to right, var(--primary-blue), #003366)', color: 'white'}}>
+      <section className="hero-sub bg-gradient-to-r from-[--primary-blue] to-[#003366] text-white">
         <div className="container animate-fade-up">
-          <span className="hero-subtitle" style={{color: 'var(--accent-green)'}}>PROFIL PERUSAHAAN</span>
-          <h1 style={{color: 'white'}}>Tentang Kami</h1>
-          <p style={{maxWidth:'600px', color: 'rgba(255, 255, 255, 0.9)'}}>Mengenal lebih dekat dedikasi dan sejarah perjalanan PT Prima Abadi dalam menyediakan pelayanan unggul untuk perusahaan Anda.</p>
+          <span className="hero-subtitle text-[--accent-green]">PROFIL PERUSAHAAN</span>
+          <h1 className="text-white">Tentang Kami</h1>
+          <p className="max-w-[600px] text-white/90">Mengenal lebih dekat dedikasi dan sejarah perjalanan PT Prima Abadi dalam menyediakan pelayanan unggul untuk perusahaan Anda.</p>
         </div>
       </section>
       <section className="section container" id="sejarah">
-        <div style={{maxWidth: '800px', margin: '0 auto', textAlign: 'center'}}>
+        <div className="max-w-[800px] mx-auto text-center">
           <h2 className="animate-fade-up">Jejak Langkah Prima Abadi</h2>
           <p className="animate-fade-up">Didirikan dengan semangat sinergi dan efisiensi logistik berkelanjutan, PT Prima Abadi mengelola lebih dari 5.000+ armada hidup tersebar di seluruh proyek industrial nusantara. Pengalaman lebih dari satu dekade menjadi bukti nyala tekad kami.</p>
           <div className="stats-grid">
@@ -34,32 +34,32 @@ export default function TentangKami() {
           </div>
         </div>
       </section>
-      <section className="section" style={{background: 'var(--bg-alt)'}} id="visi">
+      <section className="section bg-[--bg-alt]" id="visi">
         <div className="container">
-          <div style={{display: 'flex', flexWrap: 'wrap', gap: '40px'}}>
-            <div style={{flex: '1', minWidth: '300px'}}>
-              <h2 style={{color: 'var(--primary-blue)'}}>Visi</h2>
+          <div className="flex flex-wrap gap-[40px]">
+            <div className="flex-1 min-w-[300px]">
+              <h2 className="text-[--primary-blue]">Visi</h2>
               <p>Menjadi mitra strategis berskala Asia Tenggara dalam penyediaan fasilitas alat operasi dan armada transportasi terintegrasi dengan mengedepankan inovasi, standar keselamatan premium, serta keberlanjutan bisnis par-excellence.</p>
             </div>
-            <div style={{flex: '1', minWidth: '300px'}}>
-              <h2 style={{color: 'var(--primary-blue)'}}>Misi</h2>
-              <ul style={{listStylePosition: 'inside', color: 'var(--text-secondary)'}}>
-                <li style={{marginBottom:'10px'}}>Optimalisasi kepuasan pelanggan lewat Zero-Downtime Guarantee.</li>
-                <li style={{marginBottom:'10px'}}>Pemanfaatan SDM tersertifikasi ISO Internasional.</li>
-                <li style={{marginBottom:'10px'}}>Integrasi teknologi hijau dan transformasi digital.</li>
+            <div className="flex-1 min-w-[300px]">
+              <h2 className="text-[--primary-blue]">Misi</h2>
+              <ul className="list-inside text-[--text-secondary]">
+                <li className="mb-[10px]">Optimalisasi kepuasan pelanggan lewat Zero-Downtime Guarantee.</li>
+                <li className="mb-[10px]">Pemanfaatan SDM tersertifikasi ISO Internasional.</li>
+                <li className="mb-[10px]">Integrasi teknologi hijau dan transformasi digital.</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
       <section className="section container" id="manajemen">
-        <div style={{maxWidth: '800px'}}>
+        <div className="max-w-[800px]">
           <h2>Jajaran Eksekutif & Manajemen</h2>
           <p>Dipimpin oleh talenta-talenta terbaik bangsa, mencitrakan ketangguhan tata kelola (Good Corporate Governance) dan profesionalitas tingkat tinggi.</p>
-          <div style={{marginTop: '40px', padding: '30px', border: '1px solid var(--border-color)', borderRadius: '12px', background: 'var(--bg-alt)'}}>
-            <h4 style={{fontSize: '20px', color: 'var(--primary-blue)', marginBottom: '5px'}}>Bpk. Nama Direktur (Placeholder)</h4>
-            <span style={{color: 'var(--accent-green)', fontSize: '14px',fontWeight:'bold'}}>DIREKTUR UTAMA</span>
-            <p style={{marginTop: '15px', color: 'var(--text-primary)'}}><i>&quot;Dedikasi tanpa batas untuk memastikan operasional tanpa henti bagi seluruh klien kami dari Sabang sampai Merauke.&quot;</i></p>
+          <div className="mt-[40px] p-[30px] border border-[--border-color] rounded-[12px] bg-[--bg-alt]">
+            <h4 className="text-[20px] text-[--primary-blue] mb-[5px]">Bpk. Nama Direktur (Placeholder)</h4>
+            <span className="text-[--accent-green] text-[14px] font-bold uppercase tracking-wider">Direktur Utama</span>
+            <p className="mt-[15px] text-[--text-primary]"><i>&quot;Dedikasi tanpa batas untuk memastikan operasional tanpa henti bagi seluruh klien kami dari Sabang sampai Merauke.&quot;</i></p>
           </div>
         </div>
       </section>
