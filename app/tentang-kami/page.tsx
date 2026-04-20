@@ -1,15 +1,17 @@
+import { Metadata } from 'next'
 import Link from 'next/link'
-export const metadata = {
+
+export const metadata: Metadata = {
   title: 'Tentang Kami | PT Prima Abadi',
 }
 export default function TentangKami() {
   return (
     <main>
-      <section className="hero-sub" style={{background: 'linear-gradient(to right, #020C1B, var(--secondary-color))'}}>
+      <section className="hero-sub" style={{background: 'linear-gradient(to right, var(--primary-blue), #003366)', color: 'white'}}>
         <div className="container animate-fade-up">
-          <span className="hero-subtitle">PROFIL PERUSAHAAN</span>
-          <h1>Tentang Kami</h1>
-          <p style={{maxWidth:'600px'}}>Mengenal lebih dekat dedikasi dan sejarah perjalanan PT Prima Abadi dalam menyediakan pelayanan unggul untuk perusahaan Anda.</p>
+          <span className="hero-subtitle" style={{color: 'var(--accent-green)'}}>PROFIL PERUSAHAAN</span>
+          <h1 style={{color: 'white'}}>Tentang Kami</h1>
+          <p style={{maxWidth:'600px', color: 'rgba(255, 255, 255, 0.9)'}}>Mengenal lebih dekat dedikasi dan sejarah perjalanan PT Prima Abadi dalam menyediakan pelayanan unggul untuk perusahaan Anda.</p>
         </div>
       </section>
       <section className="section container" id="sejarah">
@@ -32,15 +34,15 @@ export default function TentangKami() {
           </div>
         </div>
       </section>
-      <section className="section" style={{background: 'var(--secondary-color)'}} id="visi">
+      <section className="section" style={{background: 'var(--bg-alt)'}} id="visi">
         <div className="container">
           <div style={{display: 'flex', flexWrap: 'wrap', gap: '40px'}}>
             <div style={{flex: '1', minWidth: '300px'}}>
-              <h2 style={{color: 'var(--accent-color)'}}>Visi</h2>
+              <h2 style={{color: 'var(--primary-blue)'}}>Visi</h2>
               <p>Menjadi mitra strategis berskala Asia Tenggara dalam penyediaan fasilitas alat operasi dan armada transportasi terintegrasi dengan mengedepankan inovasi, standar keselamatan premium, serta keberlanjutan bisnis par-excellence.</p>
             </div>
             <div style={{flex: '1', minWidth: '300px'}}>
-              <h2 style={{color: 'var(--accent-color)'}}>Misi</h2>
+              <h2 style={{color: 'var(--primary-blue)'}}>Misi</h2>
               <ul style={{listStylePosition: 'inside', color: 'var(--text-secondary)'}}>
                 <li style={{marginBottom:'10px'}}>Optimalisasi kepuasan pelanggan lewat Zero-Downtime Guarantee.</li>
                 <li style={{marginBottom:'10px'}}>Pemanfaatan SDM tersertifikasi ISO Internasional.</li>
@@ -54,10 +56,10 @@ export default function TentangKami() {
         <div style={{maxWidth: '800px'}}>
           <h2>Jajaran Eksekutif & Manajemen</h2>
           <p>Dipimpin oleh talenta-talenta terbaik bangsa, mencitrakan ketangguhan tata kelola (Good Corporate Governance) dan profesionalitas tingkat tinggi.</p>
-          <div style={{marginTop: '40px', padding: '30px', border: '1px solid var(--accent-color)', borderRadius: '12px', background: 'rgba(100, 255, 218, 0.05)'}}>
-            <h4 style={{fontSize: '20px', color: 'var(--text-primary)', marginBottom: '5px'}}>Bpk. Nama Direktur (Placeholder)</h4>
-            <span style={{color: 'var(--accent-color)', fontSize: '14px',fontFamily:'monospace'}}>DIREKTUR UTAMA</span>
-            <p style={{marginTop: '15px'}}><i>"Dedikasi tanpa batas untuk memastikan operasional tanpa henti bagi seluruh klien kami dari Sabang sampai Merauke."</i></p>
+          <div style={{marginTop: '40px', padding: '30px', border: '1px solid var(--border-color)', borderRadius: '12px', background: 'var(--bg-alt)'}}>
+            <h4 style={{fontSize: '20px', color: 'var(--primary-blue)', marginBottom: '5px'}}>Bpk. Nama Direktur (Placeholder)</h4>
+            <span style={{color: 'var(--accent-green)', fontSize: '14px',fontWeight:'bold'}}>DIREKTUR UTAMA</span>
+            <p style={{marginTop: '15px', color: 'var(--text-primary)'}}><i>&quot;Dedikasi tanpa batas untuk memastikan operasional tanpa henti bagi seluruh klien kami dari Sabang sampai Merauke.&quot;</i></p>
           </div>
         </div>
       </section>
