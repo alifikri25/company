@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+:root {
+  --primary-color: #0A192F;
+  --secondary-color: #112240;
+  --accent-color: #64FFDA;
+  --text-primary: #CCD6F6;
+  --text-secondary: #8892B0;
+  --bg-color: #020C1B;
+  --bg-card: #112240;
+  --border-radius: 12px;
+  --transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1.1;
+}
+h1 { font-size: clamp(40px, 8vw, 80px); }
+h2 { font-size: clamp(26px, 5vw, 32px); margin-bottom: 20px;}
+p { font-size: 18px; color: var(--text-secondary); margin-bottom: 20px; }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.section {
+  padding: 100px 0;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeInUp 0.8s ease forwards;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  background: transparent;
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn:hover {
+  background: rgba(100, 255, 218, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -10px var(--accent-color);
+}
+.btn-primary {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+.btn-primary:hover {
+  background: #52e0c4;
+}
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to right, rgba(2,12,27,0.95), rgba(2,12,27,0.5));
+  z-index: 1;
+}
+.hero-subtitle {
+  color: var(--accent-color);
+  font-family: monospace;
+  font-size: 18px;
+  margin-bottom: 20px;
+  display: block;
+  letter-spacing: 2px;
+}
+.hero-bg-img {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+.hero-sub {
+  min-height: 40vh;
+  padding-top: 100px;
+}
+.navbar {
+  position: fixed;
+  top: 0; width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: rgba(2, 12, 27, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.nav-brand {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent-color);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  align-items: center;
+}
+.nav-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+.nav-link:hover {
+  color: var(--accent-color);
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+.service-card {
+  background: var(--bg-card);
+  border-radius: var(--border-radius);
+  padding: 30px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+}
+.service-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent-color);
+  box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
+}
+.service-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.partners-section {
+  background: var(--bg-card);
+  padding: 60px 0;
+  text-align: center;
+}
+.partners-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 60px;
+  margin-top: 40px;
+}
+.partner-logo {
+  height: 40px;
+  opacity: 0.4;
+  filter: grayscale(100%);
+  transition: var(--transition);
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+}
+.partner-logo:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+.news-card {
+  background: var(--bg-card);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: var(--transition);
+}
+.news-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-color);
+}
+.news-img {
+  width: 100%;
+  height: 200px;
+  background: #1d2d50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.news-content {
+  padding: 25px;
+}
+.news-date {
+  font-size: 12px;
+  color: var(--accent-color);
+  display: block;
+  margin-bottom: 10px;
+}
+.mega-footer {
+  background-color: #01060e;
+  padding: 80px 0 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-bottom: 60px;
+}
+.footer-column h4 {
+  color: var(--accent-color);
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+.footer-column ul {
+  list-style: none;
+}
+.footer-column ul li {
+  margin-bottom: 12px;
+}
+.footer-column ul li a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: var(--transition);
+}
+.footer-column ul li a:hover {
+  color: var(--accent-color);
+  padding-left: 5px;
+}
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+  text-align: center;
+}
+.stat-box h3 {
+  font-size: 48px;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+@media (max-width: 768px) {
+  .navbar { padding: 15px 20px; }
+  .nav-links { display: none; }
+  h1 { font-size: 36px; }
+  .section { padding: 60px 0; }
+  .hero-content { padding: 0 20px; }
+}
