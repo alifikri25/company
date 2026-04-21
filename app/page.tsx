@@ -12,7 +12,14 @@ const STATS = [
   { value: 15, suffix: "+", label: "Tahun Pengalaman" },
 ]
 
-const PARTNERS = ["Pertamina", "Telkom", "BUMN", "Patra Jasa", "MIND ID", "PLN", "Pelindo", "Jasa Marga"]
+const PARTNERS = [
+  { name: "Jasa Marga", logo: "/logo-jasamarga.webp" },
+  { name: "PLN", logo: "/logo-pln-v2.webp" },
+  { name: "Mind ID", logo: "/logo-mindid.webp" },
+  { name: "BUMN", logo: "/logo-bumn.webp" },
+  { name: "Telkom", logo: "/logo-telkom.webp" },
+  { name: "Pertamina", logo: "/logo-pertamina.webp" },
+]
 
 const SERVICES = [
   { 
@@ -94,7 +101,7 @@ export default function Home() {
               <div style={{ width: 20, height: 20, borderRadius: "50%", background: "var(--accent-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <div style={{ width: 6, height: 6, borderRadius: "50%", background: "white" }} />
               </div>
-              <span style={{ fontFamily: "var(--font-display)", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.8)" }}>BUMN & Swasta Partner</span>
+              <span style={{ fontFamily: "var(--font-display)", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,1)" }}>BUMN & Swasta Partner</span>
             </div>
             
             <h1 className="text-white">
@@ -111,7 +118,7 @@ export default function Home() {
               <Link href="/layanan" className="btn btn-accent" style={{ gap: 8 }}>
                 Solusi Kami <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </Link>
-              <Link href="/tentang-kami" className="btn btn-ghost" style={{ backdropFilter: "blur(5px)", WebkitBackdropFilter: "blur(5px)" }}>
+              <Link href="/tentang-kami" className="btn btn-ghost" style={{ backdropFilter: "blur(5px)", WebkitBackdropFilter: "blur(5px)", border: "1px solid rgba(255, 255, 255, 0.25)" }}>
                 Profil Manajemen
               </Link>
             </div>
@@ -119,11 +126,11 @@ export default function Home() {
           
           <div ref={statsRef} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             {STATS.map((s, i) => (
-              <div key={i} className="stat-card" style={{ backdropFilter: "blur(5px)", WebkitBackdropFilter: "blur(5px)" }}>
+              <div key={i} className="stat-card" style={{ backdropFilter: "blur(5px)", WebkitBackdropFilter: "blur(5px)", border: "1px solid rgba(255, 255, 255, 0.25)" }}>
                 <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3vw, 40px)", fontWeight: 800, color: "white", letterSpacing: "-0.03em", lineHeight: 1, marginBottom: 8 }}>
                   {statsActive ? <Counter end={s.value} suffix={s.suffix} /> : 0}
                 </div>
-                <div style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "rgba(255,255,255,0.55)", fontWeight: 500 }}>{s.label}</div>
+                <div style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "rgba(255,255,255,1)", fontWeight: 500 }}>{s.label}</div>
               </div>
             ))}
           </div>
@@ -131,14 +138,36 @@ export default function Home() {
       </section>
 
       {/* Partners Marquee */}
-      <section style={{ background: "white", borderTop: "1px solid var(--neutral-200)", borderBottom: "1px solid var(--neutral-200)", padding: "28px 0", overflow: "hidden" }}>
+      <section style={{ background: "white", borderTop: "1px solid var(--neutral-200)", padding: "40px 0", overflow: "hidden" }}>
         <div style={{ textAlign: "center", fontFamily: "var(--font-display)", fontSize: 10, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--muted-blue)", marginBottom: 20 }}>DIPERCAYA OLEH PERUSAHAAN TERKEMUKA INDONESIA</div>
         <div style={{ position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 80, background: "linear-gradient(to right, white, transparent)", zIndex: 2 }} />
           <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 80, background: "linear-gradient(to left, white, transparent)", zIndex: 2 }} />
           <div className="marquee-track">
-            {[...PARTNERS, ...PARTNERS].map((p, i) => (
-              <div key={i} style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 15, color: "var(--primary-blue)", opacity: 0.28, letterSpacing: "0.05em", whiteSpace: "nowrap", padding: "0 12px" }}>{p.toUpperCase()}</div>
+            {[...PARTNERS, ...PARTNERS, ...PARTNERS].map((p, i) => (
+              <div key={i} style={{ 
+                flexShrink: 0, 
+                width: 180, 
+                height: 80, 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center",
+                padding: "0 32px"
+              }}>
+                <Image 
+                  src={p.logo} 
+                  alt={p.name} 
+                  width={140} 
+                  height={60} 
+                  style={{ 
+                    objectFit: "contain", 
+                    filter: "grayscale(1) brightness(1.2) opacity(0.4)",
+                    transition: "all 0.3s ease" 
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.filter = "grayscale(0) brightness(1) opacity(1)")}
+                  onMouseOut={(e) => (e.currentTarget.style.filter = "grayscale(1) brightness(1.2) opacity(0.4)")}
+                />
+              </div>
             ))}
           </div>
         </div>
