@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -14,6 +15,20 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto'
+    }
+  }, [isMenuOpen])
+
+  const toggleMenu = () => {
+    const newState = !isMenuOpen
+    setIsMenuOpen(newState)
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = newState ? 'hidden' : 'auto'
+    }
+  }
 
   const navLinks = [
     { label: 'Beranda', href: '/' },
@@ -30,19 +45,20 @@ const Navbar = () => {
 
   return (
     <header className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', height: '100%' }}>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', zIndex: 110 }}>
           <Image 
             src="/logo-panjang.png" 
             alt="Tangguh Jaya Semesta" 
-            width={180} 
-            height={40} 
+            width={scrolled ? 150 : 180} 
+            height={scrolled ? 34 : 40} 
             priority
-            style={{ objectFit: 'contain' }}
+            style={{ objectFit: 'contain', transition: 'all 0.3s ease' }}
           />
         </Link>
 
-        <nav style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+        {/* Desktop Nav */}
+        <nav className="nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
           {navLinks.map((link) => (
             <Link 
               key={link.href} 
@@ -67,9 +83,76 @@ const Navbar = () => {
           ))}
         </nav>
 
-        <Link href="/kontak" className="btn btn-primary" style={{ fontSize: 13, padding: '10px 20px' }}>
-          Hubungi Kami
-        </Link>
+        <div className="btn-desktop">
+          <Link href="/kontak" className="btn btn-primary" style={{ fontSize: 13, padding: '10px 20px' }}>
+            Hubungi Kami
+          </Link>
+        </div>
+
+        {/* Mobile Toggle */}
+        <button 
+          onClick={toggleMenu}
+          className="mobile-toggle"
+          style={{ 
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            padding: 8,
+            zIndex: 110
+          }}
+        >
+          <div style={{ width: 24, height: 18, position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <span style={{ width: '100%', height: 2, background: 'var(--primary-blue)', transition: 'all 0.3s ease', transform: isMenuOpen ? 'rotate(45deg) translate(5px, 6px)' : 'none' }} />
+            <span style={{ width: '100%', height: 2, background: 'var(--primary-blue)', transition: 'all 0.3s ease', opacity: isMenuOpen ? 0 : 1 }} />
+            <span style={{ width: '100%', height: 2, background: 'var(--primary-blue)', transition: 'all 0.3s ease', transform: isMenuOpen ? 'rotate(-45deg) translate(5px, -6px)' : 'none' }} />
+          </div>
+        </button>
+
+        {/* Mobile Menu */}
+        <div style={{ 
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100vh',
+          background: 'white',
+          zIndex: 105,
+          padding: '100px 24px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 16,
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: isMenuOpen ? 'translateY(0)' : 'translateY(-100%)',
+          opacity: isMenuOpen ? 1 : 0,
+          visibility: isMenuOpen ? 'visible' : 'hidden'
+        }}>
+          {navLinks.map((link) => (
+            <Link 
+              key={link.href} 
+              href={link.href} 
+              onClick={() => setIsMenuOpen(false)}
+              style={{ 
+                textDecoration: 'none',
+                fontFamily: 'var(--font-display)', 
+                fontSize: 18, 
+                fontWeight: 700, 
+                color: isActive(link.href) ? 'var(--primary-blue)' : '#2c3e50',
+                padding: '12px 0',
+                borderBottom: '1px solid var(--neutral-100)'
+              }}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link 
+            href="/kontak" 
+            className="btn btn-primary" 
+            onClick={() => setIsMenuOpen(false)}
+            style={{ marginTop: 20, padding: '16px' }}
+          >
+            Hubungi Kami
+          </Link>
+        </div>
       </div>
     </header>
   )

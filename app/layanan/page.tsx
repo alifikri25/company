@@ -35,7 +35,7 @@ function Eyebrow({ text }: { text: string }) {
 
 function SubHero({ eyebrow, title, subtitle }: { eyebrow: string, title: string, subtitle: string }) {
   return (
-    <section className="animate-fade-up" style={{ 
+    <section className="animate-fade-up section-padding-mobile" style={{ 
       background: "transparent", 
       padding: "100px 24px 72px", 
       position: "relative", 
@@ -52,7 +52,7 @@ function SubHero({ eyebrow, title, subtitle }: { eyebrow: string, title: string,
       <div style={{ position: "absolute", top: -80, right: -80, width: 360, height: 360, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.05)" }} />
       <div className="container" style={{ position: "relative" }}>
         <Eyebrow text={eyebrow} />
-        <h1 className="text-white" style={{ 
+        <h1 className="text-white hero-title-mobile" style={{ 
           fontSize: "clamp(32px, 5vw, 52px)", 
           marginBottom: 20,
           textShadow: "0 2px 15px rgba(0,0,0,0.5)"
@@ -74,8 +74,8 @@ export default function Layanan() {
 
       {SERVICES.map((s, idx) => (
         <section key={s.id} id={s.id} className="section" style={{ background: idx % 2 === 0 ? "white" : "var(--neutral-100)" }}>
-          <div className="container" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 72, alignItems: "center" }}>
-            <div style={{ order: idx % 2 === 0 ? 1 : 2, borderRadius: 24, overflow: "hidden", height: 380, position: "relative" }}>
+          <div className="container grid-1-on-mobile" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "clamp(32px, 6vw, 72px)", alignItems: "center" }}>
+            <div style={{ order: idx % 2 === 0 ? 1 : 2, borderRadius: 24, overflow: "hidden", height: "clamp(240px, 40vw, 380px)", position: "relative" }} className="mobile-order-1">
               <Image 
                 src={s.image} 
                 alt={s.title} 
@@ -84,7 +84,7 @@ export default function Layanan() {
               />
             </div>
             
-            <div style={{ order: idx % 2 === 0 ? 2 : 1 }}>
+            <div style={{ order: idx % 2 === 0 ? 2 : 1 }} className="mobile-order-2">
               <Eyebrow text={s.label} />
               <h2 style={{ fontSize: "clamp(22px, 2.5vw, 32px)", marginBottom: 16 }}>{s.title}</h2>
               <p style={{ fontSize: 16, marginBottom: 28 }}>{s.description}</p>

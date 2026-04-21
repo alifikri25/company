@@ -22,7 +22,7 @@ function Eyebrow({ text }: { text: string }) {
 
 function SubHero({ eyebrow, title, subtitle }: { eyebrow: string, title: string, subtitle: string }) {
   return (
-    <section className="animate-fade-up" style={{ 
+    <section className="animate-fade-up section-padding-mobile" style={{ 
       background: "transparent", 
       padding: "100px 24px 72px", 
       position: "relative", 
@@ -39,7 +39,7 @@ function SubHero({ eyebrow, title, subtitle }: { eyebrow: string, title: string,
       <div style={{ position: "absolute", top: -80, right: -80, width: 360, height: 360, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.05)" }} />
       <div className="container" style={{ position: "relative" }}>
         <Eyebrow text={eyebrow} />
-        <h1 className="text-white" style={{ 
+        <h1 className="text-white hero-title-mobile" style={{ 
           fontSize: "clamp(32px, 5vw, 52px)", 
           marginBottom: 20,
           textShadow: "0 2px 15px rgba(0,0,0,0.5)"
@@ -78,7 +78,7 @@ export default function TentangKami() {
             Didirikan dengan semangat sinergi dan efisiensi logistik berkelanjutan, PT. Tangguh Jaya Semesta mengelola lebih dari 5.000+ armada tersebar di seluruh proyek industrial nusantara.
           </p>
           
-          <div ref={statsRef} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 24 }}>
+          <div ref={statsRef} className="grid-1-on-mobile" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 24 }}>
             {STATS.map((s, i) => (
               <div key={i} style={{ background: "var(--neutral-100)", borderRadius: 16, padding: "32px 20px" }}>
                 <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 800, color: "var(--primary-blue)", letterSpacing: "-0.03em", lineHeight: 1, marginBottom: 8 }}>
@@ -95,7 +95,7 @@ export default function TentangKami() {
         <div className="container" style={{ maxWidth: 880 }}>
           <div style={{ marginBottom: 64, textAlign: "center" }}>
             <Eyebrow text="Visi" />
-            <div style={{ background: "linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%)", borderRadius: 20, padding: "48px 48px", position: "relative", overflow: "hidden" }}>
+            <div style={{ background: "linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%)", borderRadius: 20, padding: "32px 24px", position: "relative", overflow: "hidden" }}>
               <p style={{ fontSize: "clamp(16px, 2vw, 20px)", color: "rgba(255,255,255,0.88)", lineHeight: 1.75, fontStyle: "italic", margin: 0 }}>
                 &quot;Menjadi mitra strategis berskala Asia Tenggara dalam penyediaan fasilitas alat operasi dan armada transportasi terintegrasi dengan mengedepankan inovasi, standar keselamatan premium, serta keberlanjutan bisnis par-excellence.&quot;
               </p>
@@ -111,7 +111,7 @@ export default function TentangKami() {
                 { n: "02", text: "Pemanfaatan SDM tersertifikasi", highlight: "ISO Internasional." },
                 { n: "03", text: "Integrasi", highlight: "teknologi hijau dan transformasi digital." },
               ].map((m, i) => (
-                <div key={i} style={{ background: "white", borderRadius: 14, padding: "24px 28px", display: "flex", alignItems: "center", gap: 24, border: "1px solid var(--neutral-200)" }}>
+                <div key={i} className="stack-on-mobile" style={{ background: "white", borderRadius: 14, padding: "24px 28px", display: "flex", alignItems: "center", gap: 24, border: "1px solid var(--neutral-200)" }}>
                   <div style={{ width: 48, height: 48, borderRadius: 12, background: "var(--primary-blue)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 14, color: "white", flexShrink: 0 }}>{m.n}</div>
                   <p style={{ fontSize: 16, color: "var(--neutral-700)", fontWeight: 500, lineHeight: 1.6, margin: 0 }}>{m.text} <strong style={{ color: "var(--primary-blue)" }}>{m.highlight}</strong></p>
                 </div>
@@ -127,7 +127,7 @@ export default function TentangKami() {
           <h2 style={{ fontSize: 28, marginBottom: 12 }}>Manajemen Perusahaan</h2>
           <p style={{ marginBottom: 40 }}>Dipimpin oleh talenta-talenta terbaik bangsa dengan Good Corporate Governance premium.</p>
           
-          <div style={{ background: "white", border: "1.5px solid var(--neutral-200)", borderLeft: "4px solid var(--primary-blue)", borderRadius: 20, padding: "40px", display: "flex", alignItems: "flex-start", gap: 28, boxShadow: "var(--shadow-md)" }}>
+          <div className="stack-on-mobile" style={{ background: "white", border: "1.5px solid var(--neutral-200)", borderLeft: "4px solid var(--primary-blue)", borderRadius: 20, padding: "32px 24px", display: "flex", alignItems: "flex-start", gap: 28, boxShadow: "var(--shadow-md)" }}>
             <div style={{ width: 72, height: 72, borderRadius: 16, background: "var(--neutral-100)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "var(--primary-blue)" }}>
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />

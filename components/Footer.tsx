@@ -83,11 +83,11 @@ const Footer = () => {
           ))}
         </div>
         
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '20px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '24px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }} className="stack-on-mobile text-center-mobile">
           <p style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'rgba(255,255,255,0.3)', margin: 0 }}>
             © {currentYear} PT. Tangguh Jaya Semesta. Authorized Enterprise Solution.
           </p>
-          <div style={{ display: 'flex', gap: 20 }}>
+          <div style={{ display: 'flex', gap: 20 }} className="hide-on-mobile">
             <Link href="/privacy" style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>Privacy Policy</Link>
             <Link href="/terms" style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>Terms of Use</Link>
           </div>

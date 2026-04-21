@@ -84,27 +84,23 @@ export default function Home() {
         <div style={{ position: "absolute", inset: 0, opacity: 0.06, backgroundImage: "radial-gradient(white 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
         <div style={{ position: "absolute", top: "10%", right: "5%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(209,44,44,0.08) 0%, transparent 70%)" }} />
         
-        <div className="container" style={{ position: "relative", zIndex: 1, width: "100%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
+        <div className="container grid-1-on-mobile" style={{ position: "relative", zIndex: 1, width: "100%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: " clamp(32px, 5vw, 60px)", alignItems: "center" }}>
           <div className="animate-fade-up">
-            <div style={{ 
+            <div className="glass-premium" style={{ 
               display: "inline-flex", 
               alignItems: "center", 
               gap: 8, 
-              background: "rgba(255, 255, 255, 0.12)", 
-              border: "1px solid rgba(255, 255, 255, 0.25)", 
               borderRadius: 100, 
               padding: "6px 14px 6px 8px", 
               marginBottom: 32, 
-              backdropFilter: "blur(5px)", 
-              WebkitBackdropFilter: "blur(5px)" 
             }}>
               <div style={{ width: 20, height: 20, borderRadius: "50%", background: "var(--accent-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <div style={{ width: 6, height: 6, borderRadius: "50%", background: "white" }} />
               </div>
-              <span style={{ fontFamily: "var(--font-display)", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,1)" }}>BUMN & Swasta Partner</span>
+              <span style={{ fontFamily: "var(--font-display)", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255, 255, 255, 1)" }}>BUMN & Swasta Partner</span>
             </div>
             
-            <h1 className="text-white">
+            <h1 className="text-white hero-title-mobile">
               Mendukung<br />
               <span style={{ background: "linear-gradient(135deg, #e85555, var(--accent-red))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Mobilitas.</span><br />
               Memberdayakan<br />Kinerja.
@@ -114,11 +110,11 @@ export default function Home() {
               Hadir di seluruh titik industrial strategis, PT. Tangguh Jaya Semesta memberikan kepastian logistik kendaraan komersil dan sarana prasarana IT tanpa kompromi kualitas.
             </p>
             
-            <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }} className="stack-on-mobile">
               <Link href="/layanan" className="btn btn-accent" style={{ gap: 8 }}>
                 Solusi Kami <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </Link>
-              <Link href="/tentang-kami" className="btn btn-ghost" style={{ backdropFilter: "blur(5px)", WebkitBackdropFilter: "blur(5px)", border: "1px solid rgba(255, 255, 255, 0.25)" }}>
+              <Link href="/tentang-kami" className="btn btn-ghost glass-premium">
                 Profil Manajemen
               </Link>
             </div>
@@ -126,11 +122,11 @@ export default function Home() {
           
           <div ref={statsRef} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             {STATS.map((s, i) => (
-              <div key={i} className="stat-card" style={{ backdropFilter: "blur(5px)", WebkitBackdropFilter: "blur(5px)", border: "1px solid rgba(255, 255, 255, 0.25)" }}>
+              <div key={i} className="stat-card glass-premium">
                 <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3vw, 40px)", fontWeight: 800, color: "white", letterSpacing: "-0.03em", lineHeight: 1, marginBottom: 8 }}>
                   {statsActive ? <Counter end={s.value} suffix={s.suffix} /> : 0}
                 </div>
-                <div style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "rgba(255,255,255,1)", fontWeight: 500 }}>{s.label}</div>
+                <div style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "rgba(255, 255, 255, 1)", fontWeight: 600 }}>{s.label}</div>
               </div>
             ))}
           </div>
@@ -145,23 +141,14 @@ export default function Home() {
           <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: 80, background: "linear-gradient(to left, white, transparent)", zIndex: 2 }} />
           <div className="marquee-track">
             {[...PARTNERS, ...PARTNERS, ...PARTNERS].map((p, i) => (
-              <div key={i} style={{ 
-                flexShrink: 0, 
-                width: 180, 
-                height: 80, 
-                display: "flex", 
-                alignItems: "center", 
-                justifyContent: "center",
-                padding: "0 32px"
-              }}>
+              <div key={i} className="partner-logo-box">
                 <Image 
                   src={p.logo} 
                   alt={p.name} 
                   width={140} 
                   height={60} 
+                  className="partner-logo-img"
                   style={{ 
-                    objectFit: "contain", 
-                    filter: "grayscale(1) brightness(1.2) opacity(0.4)",
                     transition: "all 0.3s ease" 
                   }}
                   onMouseOver={(e) => (e.currentTarget.style.filter = "grayscale(0) brightness(1) opacity(1)")}
@@ -185,7 +172,7 @@ export default function Home() {
             <p style={{ maxWidth: 480, margin: "0 auto" }}>Fokus dedikasi kami ada pada kehandalan peralatan dengan jaminan <em>zero-downtime maintenance</em>.</p>
           </div>
           
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 28 }}>
+          <div className="grid-1-on-mobile" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 28 }}>
             {SERVICES.map(s => (
               <Link key={s.id} href={`/layanan#${s.id}`} className="service-card" style={{ textDecoration: 'none' }}>
                 <div style={{ height: 200, position: "relative", overflow: "hidden" }}>
@@ -211,7 +198,7 @@ export default function Home() {
       {/* News Section */}
       <section className="section" style={{ background: "var(--neutral-100)" }}>
         <div className="container">
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48, gap: 24, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48, gap: 24, flexWrap: "wrap" }} className="stack-on-mobile text-center-mobile">
             <div>
               <div className="eyebrow-container">
                 <div className="eyebrow-line" />

@@ -21,7 +21,7 @@ function Eyebrow({ text }: { text: string }) {
 
 function SubHero({ eyebrow, title, subtitle }: { eyebrow: string, title: string, subtitle: string }) {
   return (
-    <section className="animate-fade-up" style={{ 
+    <section className="animate-fade-up section-padding-mobile" style={{ 
       background: "transparent", 
       padding: "100px 24px 72px", 
       position: "relative", 
@@ -38,7 +38,7 @@ function SubHero({ eyebrow, title, subtitle }: { eyebrow: string, title: string,
       <div style={{ position: "absolute", top: -80, right: -80, width: 360, height: 360, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.05)" }} />
       <div className="container" style={{ position: "relative" }}>
         <Eyebrow text={eyebrow} />
-        <h1 className="text-white" style={{ 
+        <h1 className="text-white hero-title-mobile" style={{ 
           fontSize: "clamp(32px, 5vw, 52px)", 
           marginBottom: 20,
           textShadow: "0 2px 15px rgba(0,0,0,0.5)"

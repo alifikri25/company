@@ -14,7 +14,7 @@ function Eyebrow({ text }: { text: string }) {
 
 function SubHero({ eyebrow, title, subtitle }: { eyebrow: string, title: string, subtitle: string }) {
   return (
-    <section className="animate-fade-up" style={{ 
+    <section className="animate-fade-up section-padding-mobile" style={{ 
       background: "transparent", 
       padding: "100px 24px 72px", 
       position: "relative", 
@@ -31,7 +31,7 @@ function SubHero({ eyebrow, title, subtitle }: { eyebrow: string, title: string,
       <div style={{ position: "absolute", top: -80, right: -80, width: 360, height: 360, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.05)" }} />
       <div className="container" style={{ position: "relative" }}>
         <Eyebrow text={eyebrow} />
-        <h1 className="text-white" style={{ 
+        <h1 className="text-white hero-title-mobile" style={{ 
           fontSize: "clamp(32px, 5vw, 52px)", 
           marginBottom: 20,
           textShadow: "0 2px 15px rgba(0,0,0,0.5)"
@@ -53,7 +53,7 @@ export default function Karir() {
 
       <section className="section" style={{ background: "var(--neutral-100)" }}>
         <div className="container" style={{ maxWidth: 840 }}>
-          <div style={{ background: "white", border: "2px dashed var(--neutral-200)", borderRadius: 24, padding: "72px 40px", textAlign: "center", marginBottom: 64 }}>
+          <div style={{ background: "white", border: "2px dashed var(--neutral-200)", borderRadius: 24, padding: "clamp(48px, 10vw, 72px) clamp(24px, 5vw, 40px)", textAlign: "center", marginBottom: 64 }}>
             <div style={{ width: 72, height: 72, background: "var(--neutral-100)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px", fontSize: 32 }}>!</div>
             <h2 style={{ fontSize: 26, marginBottom: 12 }}>Belum Ada Lowongan Aktif</h2>
             <p style={{ maxWidth: 440, margin: "0 auto 36px" }}>Saat ini PT. Tangguh Jaya Semesta belum membuka rekrutmen baru. Pantau portal ini secara berkala.</p>

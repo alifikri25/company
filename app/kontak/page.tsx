@@ -14,7 +14,7 @@ function Eyebrow({ text }: { text: string }) {
 
 function SubHero({ eyebrow, title, subtitle }: { eyebrow: string, title: string, subtitle: string }) {
   return (
-    <section className="animate-fade-up" style={{ 
+    <section className="animate-fade-up section-padding-mobile" style={{ 
       background: "transparent", 
       padding: "100px 24px 72px", 
       position: "relative", 
@@ -31,7 +31,7 @@ function SubHero({ eyebrow, title, subtitle }: { eyebrow: string, title: string,
       <div style={{ position: "absolute", top: -80, right: -80, width: 360, height: 360, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.05)" }} />
       <div className="container" style={{ position: "relative" }}>
         <Eyebrow text={eyebrow} />
-        <h1 className="text-white" style={{ 
+        <h1 className="text-white hero-title-mobile" style={{ 
           fontSize: "clamp(32px, 5vw, 52px)", 
           marginBottom: 20,
           textShadow: "0 2px 15px rgba(0,0,0,0.5)"
@@ -60,9 +60,9 @@ export default function Kontak() {
       />
 
       <section className="section" style={{ background: "var(--neutral-100)" }}>
-        <div className="container" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 40, alignItems: "start" }}>
+        <div className="container grid-1-on-mobile" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 40, alignItems: "start" }}>
           
-          <div style={{ background: "white", borderRadius: 24, padding: "48px", boxShadow: "0 8px 40px rgba(21,38,115,0.07)", border: "1px solid var(--neutral-200)" }}>
+          <div style={{ background: "white", borderRadius: 24, padding: "clamp(24px, 5vw, 48px)", boxShadow: "0 8px 40px rgba(21,38,115,0.07)", border: "1px solid var(--neutral-200)" }}>
             <h2 style={{ fontSize: 26, marginBottom: 8 }}>Kirim Permintaan</h2>
             <p style={{ fontSize: 15, color: "var(--muted-blue)", marginBottom: 36 }}>Lengkapi formulir untuk konsultasi solusi fasilitas korporat Anda.</p>
             
@@ -78,7 +78,7 @@ export default function Kontak() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+                <div className="grid-1-on-mobile" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
                   {[
                     { id: "name", label: "Nama Lengkap", type: "text", ph: "Budi Santoso" },
                     { id: "email", label: "Email Korporat", type: "email", ph: "budi@perusahaan.com" }
