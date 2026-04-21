@@ -1,102 +1,108 @@
-import { Metadata } from 'next'
-import Link from 'next/link'
+'use client'
+
+import React from 'react'
 import Image from 'next/image'
 
-export const metadata: Metadata = {
-  title: 'Layanan Eksekutif | PT. Tangguh Jaya Semesta',
+const SERVICES = [
+  { 
+    id: "kendaraan", 
+    label: "Armada Korporat", 
+    title: "Penyewaan Berkala Armada Kendaraan", 
+    description: "Pengadaan armada eksekutif, operasional, dan lapangan — sedan premium, SUV, hingga microbus. Skema fleksibel dengan zero-downtime guarantee.", 
+    features: ["Skema Sewa Fleksibel (Menengah/Panjang)", "Asuransi All-Risk Comprehensive", "Perawatan Servis Rutin Ditanggung Penuh", "Unit Pengganti Maks 1×24 Jam"], 
+    image: "/rental-demo.png", 
+    accent: "#152673" 
+  },
+  { 
+    id: "alat", 
+    label: "Infrastruktur IT", 
+    title: "Perangkat IT & Furnitur Penunjang", 
+    description: "Satu unit laptop hingga 10.000 workstation — hardware mumpuni, software terlisensi, dan furniture ergonomis siap kirim ke seluruh provinsi.", 
+    features: ["Laptop Enterprise / PC Workstation Gen Terbaru", "Fotokopi, Plotter & Printer Skala Pabrik", "Set Meja Direksi & Kursi Ergonomis", "IT Support On-Site (Opsional)"], 
+    image: "/equipment-demo.png", 
+    accent: "#d12c2c" 
+  },
+]
+
+function Eyebrow({ text }: { text: string }) {
+  return (
+    <div className="eyebrow-container">
+      <div className="eyebrow-line" />
+      <span className="eyebrow-text">{text}</span>
+    </div>
+  )
+}
+
+function SubHero({ eyebrow, title, subtitle }: { eyebrow: string, title: string, subtitle: string }) {
+  return (
+    <section className="animate-fade-up" style={{ 
+      background: "transparent", 
+      padding: "100px 24px 72px", 
+      position: "relative", 
+      overflow: "hidden" 
+    }}>
+      <Image 
+        src="/banner-layanan.png" 
+        alt="Background" 
+        fill 
+        className="object-cover"
+        style={{ zIndex: -1, opacity: 1 }}
+      />
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, var(--primary-blue), var(--accent-red), var(--primary-blue))" }} />
+      <div style={{ position: "absolute", top: -80, right: -80, width: 360, height: 360, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.05)" }} />
+      <div className="container" style={{ position: "relative" }}>
+        <Eyebrow text={eyebrow} />
+        <h1 className="text-white" style={{ 
+          fontSize: "clamp(32px, 5vw, 52px)", 
+          marginBottom: 20,
+          textShadow: "0 2px 15px rgba(0,0,0,0.5)"
+        }}>{title}</h1>
+        <p style={{ fontSize: 17, color: "white", maxWidth: 560, textShadow: "0 1px 8px rgba(0,0,0,0.4)", fontWeight: 500 }}>{subtitle}</p>
+      </div>
+    </section>
+  )
 }
 
 export default function Layanan() {
   return (
     <main>
-      <section className="hero-sub bg-gradient-to-r from-[--primary-blue] to-[#0d1a52] text-white">
-        <div className="container animate-fade-up">
-          <span className="hero-subtitle text-white border-white">LINE OF BUSINESS</span>
-          <h1 className="text-white">Layanan & Solusi Fasilitas</h1>
-          <p className="max-w-[600px] text-white font-medium">Penyediaan unit siap pakai dengan kualitas jaminan mutu internasional, kami mendefinisikan ulang standar kemudahan korporat.</p>
-        </div>
-      </section>
+      <SubHero 
+        eyebrow="Line of Business" 
+        title="Layanan & Solusi Fasilitas" 
+        subtitle="Penyediaan unit siap pakai dengan kualitas jaminan mutu internasional, kami mendefinisikan ulang standar kemudahan korporat." 
+      />
 
-      <section className="section container" id="kendaraan">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="animate-fade-up">
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-[--primary-blue] to-[--accent-green] rounded-[20px] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+      {SERVICES.map((s, idx) => (
+        <section key={s.id} id={s.id} className="section" style={{ background: idx % 2 === 0 ? "white" : "var(--neutral-100)" }}>
+          <div className="container" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 72, alignItems: "center" }}>
+            <div style={{ order: idx % 2 === 0 ? 1 : 2, borderRadius: 24, overflow: "hidden", height: 380, position: "relative" }}>
               <Image 
-                src="/rental-vehicle-demo.png" 
-                width={800} 
-                height={500} 
-                className="relative w-full h-auto rounded-[16px] shadow-2xl" 
-                alt="Armada Korporat" 
+                src={s.image} 
+                alt={s.title} 
+                fill 
+                className="object-cover transition-transform duration-500 hover:scale-110"
               />
             </div>
-          </div>
-          <div className="animate-fade-up">
-            <h2 className="text-[--primary-blue] mb-6">Penyewaan Berkala Armada Kendaraan</h2>
-            <p className="text-[--text-primary] text-lg leading-relaxed mb-8">Pengadaan armada untuk kebutuhan jajaran eksekutif, operasional cabang, dan lapangan, mencakup sedan premium, SUV tangguh, hingga microbus pariwisata staf operasional lapangan.</p>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-4">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[--accent-green]/10 text-[--accent-green] flex items-center justify-center font-bold text-sm">✓</span>
-                <span className="text-[--text-primary] font-medium pt-0.5">Skema Sewa Syarat Fleksibel (Jangka Menengah/Panjang)</span>
-              </li>
-              <li className="flex items-start gap-4">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[--accent-green]/10 text-[--accent-green] flex items-center justify-center font-bold text-sm">✓</span>
-                <span className="text-[--text-primary] font-medium pt-0.5">Termasuk Asuransi All-Risk Compehensive</span>
-              </li>
-              <li className="flex items-start gap-4">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[--accent-green]/10 text-[--accent-green] flex items-center justify-center font-bold text-sm">✓</span>
-                <span className="text-[--text-primary] font-medium pt-0.5">Perawatan Servis Rutin Ditanggung Penuh</span>
-              </li>
-              <li className="flex items-start gap-4">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[--accent-green]/10 text-[--accent-green] flex items-center justify-center font-bold text-sm">✓</span>
-                <span className="text-[--text-primary] font-medium pt-0.5">Unit Pengganti Maks 1x24 Jam jika Terjadi Kendala</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="section bg-[--neutral-100]" id="alat">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="order-2 lg:order-1 animate-fade-up">
-              <h2 className="text-[--primary-blue] mb-6">Peralatan IT & Furnitur Penunjang</h2>
-              <p className="text-[--text-primary] text-lg leading-relaxed mb-8">Mulai dari satu unit laptop hingga 10.000 unit workstation, Tangguh Jaya Semesta menjamin ketersediaan hardware mumpuni, software terlisensi resmi, hingga filing cabinet modular.</p>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[--accent-green]/10 text-[--accent-green] flex items-center justify-center font-bold text-sm">✓</span>
-                  <span className="text-[--text-primary] font-medium pt-0.5">Laptop Enterprise / PC Workstation (Intel/AMD Gen Terbaru)</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[--accent-green]/10 text-[--accent-green] flex items-center justify-center font-bold text-sm">✓</span>
-                  <span className="text-[--text-primary] font-medium pt-0.5">Fotokopi, Plotter & Printer Skala Pabrik</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[--accent-green]/10 text-[--accent-green] flex items-center justify-center font-bold text-sm">✓</span>
-                  <span className="text-[--text-primary] font-medium pt-0.5">Set Meja Direksi & Kursi Ergonomis Tahan Lama</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[--accent-green]/10 text-[--accent-green] flex items-center justify-center font-bold text-sm">✓</span>
-                  <span className="text-[--text-primary] font-medium pt-0.5">Dukungan Ahli IT Support On-Site (Opsional)</span>
-                </li>
+            
+            <div style={{ order: idx % 2 === 0 ? 2 : 1 }}>
+              <Eyebrow text={s.label} />
+              <h2 style={{ fontSize: "clamp(22px, 2.5vw, 32px)", marginBottom: 16 }}>{s.title}</h2>
+              <p style={{ fontSize: 16, marginBottom: 28 }}>{s.description}</p>
+              
+              <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: 14 }}>
+                {s.features.map((f, i) => (
+                  <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12, fontSize: 15, fontWeight: 500 }}>
+                    <div style={{ width: 24, height: 24, borderRadius: "50%", background: `${s.accent}15`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke={s.accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    </div>
+                    {f}
+                  </li>
+                ))}
               </ul>
             </div>
-            <div className="order-1 lg:order-2 animate-fade-up">
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[--primary-blue] to-[--accent-green] rounded-[20px] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                <Image 
-                  src="/office-equipment-demo.png" 
-                  width={800} 
-                  height={500} 
-                  className="relative w-full h-auto rounded-[16px] shadow-2xl" 
-                  alt="Workstation IT" 
-                />
-              </div>
-            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ))}
     </main>
   )
 }
-

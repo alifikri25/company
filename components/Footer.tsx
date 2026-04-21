@@ -1,67 +1,100 @@
+'use client'
+
+import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-export default function Footer() {
+const Footer = () => {
+  const currentYear = new Date().getFullYear()
+
+  const cols = [
+    { 
+      title: "Lini Bisnis", 
+      links: [
+        { label: "Penyewaan Kendaraan", href: "/layanan#kendaraan" }, 
+        { label: "Perangkat IT & Furniture", href: "/layanan#alat" }
+      ] 
+    },
+    { 
+      title: "Tentang Kami", 
+      links: [
+        { label: "Profil Perusahaan", href: "/tentang-kami" }, 
+        { label: "Visi & Misi", href: "/tentang-kami#visi" }, 
+        { label: "Manajemen", href: "/tentang-kami#manajemen" }
+      ] 
+    },
+    { 
+      title: "Tautan Cepat", 
+      links: [
+        { label: "Media & Informasi", href: "/berita" }, 
+        { label: "Karir", href: "/karir" }, 
+        { label: "Hubungi Kami", href: "/kontak" }
+      ] 
+    },
+  ]
+
   return (
-    <footer className="mega-footer">
+    <footer style={{ background: 'var(--neutral-900)', padding: '64px 24px 0', position: 'relative' }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(90deg, var(--primary-blue), var(--accent-red) 50%, var(--primary-blue))' }} />
       <div className="container">
-        <div className="footer-grid">
-          <div className="footer-column">
-            <div className="mb-6 block">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 48, marginBottom: 48 }}>
+          <div style={{ gridColumn: 'span 1' }}>
+            <div style={{ marginBottom: 20 }}>
               <Image 
                 src="/logo-panjang.png" 
-                alt="PT. Tangguh Jaya Semesta Logo" 
-                width={180} 
+                alt="Tangguh Jaya Semesta" 
+                width={200} 
                 height={45} 
-                className="h-10 w-auto object-contain brightness-0 invert"
+                className="brightness-0 invert"
+                style={{ objectFit: 'contain' }}
               />
             </div>
-            <p className="text-[14px] leading-relaxed">Gedung Prima Headquarter Lt. 12<br/>Jl. Jend. Sudirman Kav 19,<br/>Jakarta Selatan 12920</p>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: 13.5, color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>
+              Gedung Prima Headquarter Lt. 12<br />
+              Jl. Jend. Sudirman Kav 19,<br />
+              Jakarta Selatan 12920
+            </p>
           </div>
-          <div className="footer-column">
-            <h4>Lini Bisnis</h4>
-            <ul>
-              <li><Link href="/layanan#kendaraan">Penyewaan Kendaraan</Link></li>
-              <li><Link href="/layanan#alat">Perangkat IT & Furniture</Link></li>
-            </ul>
-          </div>
-          <div className="footer-column">
-            <h4>Tentang Kami</h4>
-            <ul>
-              <li><Link href="/tentang-kami">Profil Perusahaan</Link></li>
-              <li><Link href="/tentang-kami#visi">Visi & Misi</Link></li>
-              <li><Link href="/tentang-kami#manajemen">Manajemen</Link></li>
-              <li><Link href="/tentang-kami#cgv">Corporate Governance</Link></li>
-              <li><Link href="/tentang-kami#annual">Annual Report</Link></li>
-            </ul>
-          </div>
-          <div className="footer-column">
-            <h4>Tautan Cepat</h4>
-            <ul>
-              <li><Link href="/berita">Media & Informasi</Link></li>
-              <li><Link href="/karir">Karir</Link></li>
-              <li><Link href="/pengadaan">e-Procurement</Link></li>
-              <li><Link href="/bantuan">Pusat Bantuan</Link></li>
-            </ul>
-          </div>
-          <div className="footer-column">
-            <h4>Kontak</h4>
-            <div className="flex flex-col gap-3 text-[14px]">
-              <span className="flex items-center gap-2 text-white">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                (021) 1500-751
-              </span>
-              <span className="flex items-center gap-2 text-white">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
-                cs@prima-abadi.co.id
-              </span>
+
+          {cols.map((col, i) => (
+            <div key={i}>
+              <h4 style={{ fontFamily: 'var(--font-display)', fontSize: 13, fontWeight: 700, color: 'white', marginBottom: 20 }}>{col.title}</h4>
+              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {col.links.map((l, j) => (
+                  <li key={j}>
+                    <Link 
+                      href={l.href} 
+                      style={{ 
+                        textDecoration: 'none',
+                        fontFamily: 'var(--font-body)', 
+                        fontSize: 13.5, 
+                        color: 'rgba(255,255,255,0.55)', 
+                        transition: 'var(--transition)'
+                      }}
+                      onMouseOver={(e) => (e.currentTarget.style.color = 'white')}
+                      onMouseOut={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.55)')}
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          ))}
         </div>
-        <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} PT. Tangguh Jaya Semesta. Authorized Enterprise Solution.</p>
+        
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '20px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'rgba(255,255,255,0.3)', margin: 0 }}>
+            © {currentYear} PT. Tangguh Jaya Semesta. Authorized Enterprise Solution.
+          </p>
+          <div style={{ display: 'flex', gap: 20 }}>
+            <Link href="/privacy" style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>Privacy Policy</Link>
+            <Link href="/terms" style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>Terms of Use</Link>
+          </div>
         </div>
       </div>
     </footer>
   )
 }
+
+export default Footer
