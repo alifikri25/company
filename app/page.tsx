@@ -16,7 +16,7 @@ export default function Home() {
         <div className="container hero-content animate-fade-up">
           <span className="hero-subtitle">BUMN & SWASTA PARTNER</span>
           <h1 className="[text-shadow:0_2px_10px_rgba(0,0,0,0.3)]">Mendukung Mobilitas.<br />Memberdayakan Kinerja.</h1>
-          <p className="max-w-[600px]">Hadir di seluruh titik industrial strategis, PT Prima Abadi memberikan kepastian logistik kendaraan komersil dan sarana prasarana IT tanpa kompromi kualitas dan keamanan bagi perusahaan Anda.</p>
+          <p className="max-w-[600px]">Hadir di seluruh titik industrial strategis, PT. Tangguh Jaya Semesta memberikan kepastian logistik kendaraan komersil dan sarana prasarana IT tanpa kompromi kualitas dan keamanan bagi perusahaan Anda.</p>
           <div className="flex gap-8 mt-10 flex-wrap">
             <Link href="/layanan" className="btn btn-accent">Solusi Kami</Link>
             <Link href="/tentang-kami" className="btn btn-ghost-white">Profil Manajemen</Link>
@@ -84,7 +84,7 @@ export default function Home() {
             <div className="section-header mb-0">
               <span className="section-eyebrow">Press & CSR</span>
               <h2 className="section-title">Berita Paripurna & TJSL</h2>
-              <p>Agenda dan aksi kepedulian lingkungan terbaru PT Prima Abadi.</p>
+              <p>Agenda dan aksi kepedulian lingkungan terbaru PT. Tangguh Jaya Semesta.</p>
             </div>
           </div>
           <div className="news-grid">
@@ -98,7 +98,7 @@ export default function Home() {
               <div className="news-content">
                 <span className="news-date">24 April 2026</span>
                 <h4>Peremajaan 500 Unit Fleet Ev (Listrik)</h4>
-                <p className="text-[14px]">Mendukung emisi nol, Prima Abadi meresmikan masuknya armada listrik.</p>
+                <p className="text-[14px]">Mendukung emisi nol, Tangguh Jaya Semesta meresmikan masuknya armada listrik.</p>
               </div>
             </div>
             <div className="news-card">

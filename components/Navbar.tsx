@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 const Navbar = () => {
@@ -23,8 +24,13 @@ const Navbar = () => {
     <header className="navbar">
       <div className="container nav-container">
         <Link href="/" className="nav-brand">
-          <span className="text-[--primary-blue]">PT</span>
-          <span className="text-[--accent-green]"> Prima Abadi</span>
+          <Image 
+            src="/logo-panjang.png" 
+            alt="PT. Tangguh Jaya Semesta Logo" 
+            width={160} 
+            height={40} 
+            className="h-9 w-auto object-contain"
+          />
         </Link>
         
         <div className={`mobile-menu-wrapper ${isMenuOpen ? 'active' : ''}`}>
