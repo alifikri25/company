@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import './globals.css'
-import Navbar from '../components/Navbar'
+import Chrome from '../components/Chrome'
 import Footer from '../components/Footer'
 
 export const metadata: Metadata = {
@@ -12,9 +12,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
         <html lang="id" data-scroll-behavior="smooth">
       <body>
-        <Navbar />
-        {children}
-        <Footer />
+        <Chrome footer={<Footer />}>
+          {children}
+        </Chrome>
       </body>
     </html>
   )
