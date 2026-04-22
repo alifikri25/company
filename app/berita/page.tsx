@@ -1,7 +1,6 @@
-'use client'
-
 import React from 'react'
 import Image from 'next/image'
+import { getSemuaBerita } from '@/app/actions/berita'
 
 const NEWS = [
   { id: 1, date: "24 April 2026", category: "Fleet & Inovasi", title: "Peremajaan 500 Unit Fleet EV (Kendaraan Listrik)", excerpt: "Mendukung emisi nol, Tangguh Jaya Semesta meresmikan masuknya kloter pertama armada mobil listrik nasional.", image: "/berita/news-ev-fleet.png", color: "#1a3a6e" },
@@ -49,7 +48,23 @@ function SubHero({ eyebrow, title, subtitle }: { eyebrow: string, title: string,
   )
 }
 
-export default function Berita() {
+export default async function Berita() {
+  let dbNews: any[] = []
+  try {
+    const data = await getSemuaBerita()
+    dbNews = data.map(b => ({
+      id: `db-${b.id}`,
+      date: b.tanggal.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
+      category: "Berita Utama",
+      title: b.judul,
+      excerpt: b.konten,
+      image: b.gambarUrl || "/hero-banner-demo.png",
+      color: "#152673"
+    }))
+  } catch {}
+  
+  const combinedNews = [...dbNews, ...NEWS]
+
   return (
     <main>
       <SubHero 
@@ -61,7 +76,7 @@ export default function Berita() {
       <section className="section" style={{ background: "var(--neutral-100)" }}>
         <div className="container">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 28 }}>
-            {NEWS.map(n => (
+            {combinedNews.map(n => (
               <div key={n.id} className="news-card" style={{ cursor: "pointer" }}>
                 <div style={{ height: 180, position: "relative", overflow: "hidden" }}>
                   <Image 

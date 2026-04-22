@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Berita {
+  id        Int      @id @default(autoincrement())
+  judul     String
+  konten    String
+  tanggal   DateTime @default(now())
+  gambarUrl String?
+}
+
+model Karir {
+  id          Int      @id @default(autoincrement())
+  posisi      String
+  departemen  String
+  lokasi      String
+  tipe        String   @default("Full-time")
+  deskripsi   String
+  persyaratan String
+  aktif       Boolean  @default(true)
+  tanggal     DateTime @default(now())
+}
+
+model PesanKontak {
+  id        Int      @id @default(autoincrement())
+  nama      String
+  email     String
+  subjek    String
+  pesan     String
+  dibaca    Boolean  @default(false)
+  tanggal   DateTime @default(now())
+}
+
+model Pengaturan {
+  id        Int    @id @default(autoincrement())
+  kunci     String @unique
+  nilai     String
+}
