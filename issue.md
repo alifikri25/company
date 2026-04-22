@@ -1,62 +1,51 @@
-# Task: Optimalisasi Responsivitas (Responsive Design) Website PT. Tangguh Jaya Semesta
+# Issue: Responsivitas Dashboard Admin & Fitur Minimize Sidebar
 
-## Latar Belakang
-Website saat ini sudah memiliki desain premium dan *glassmorphism* untuk resolusi desktop. Namun, untuk memastikan pengalaman pengguna yang sempurna di berbagai perangkat (Mobile, Tablet, Desktop), struktur *layouting* perlu dimodifikasi agar fully responsive. 
+**Tingkat Kesulitan:** Junior / Menengah
+**Tujuan:** Mengoptimalkan tampilan dashboard admin PT. Tangguh Jaya Semesta agar responsif di semua ukuran layar (Mobile, Tablet, Desktop) serta merapikan logika dan tampilan dari fitur minimize (collapse) sidebar.
 
-Tugas ini dirancang agar dapat dieksekusi secara terstruktur oleh Junior Programmer atau AI Assistant. Sebagian besar komponen saat ini menggunakan *inline styles* di React, sehingga perbaikan akan berfokus pada transisi *grid/flexbox* ke format *mobile-friendly* dan modifikasi ukuran teks/padding.
+## Konteks Saat Ini
+Saat ini, komponen `AdminSidebar` dan `AdminMobileHeader` sudah dibuat, namun masih menggunakan manipulasi DOM secara langsung (seperti `document.querySelector(...)` dan manipulasi properti `style`) yang kurang sesuai dengan praktik terbaik React. Selain itu, tampilan grid di dalam dashboard admin (`admin-stats-grid` dan `admin-content-grid`) perlu disesuaikan agar rapi di layar yang lebih kecil. Banyak *inline styles* yang membuat kode sulit dikelola.
 
----
+## Langkah-Langkah Pengerjaan
 
-## 📋 Langkah-Langkah Pengerjaan
+### 1. Refactor Logika Minimize Sidebar (Desktop)
+*   **File Tujuan:** `components/AdminSidebar.tsx`
+*   **Tugas:**
+    *   Fitur *minimize/collapse* saat ini menggunakan state `isCollapsed` dan mencoba memanipulasi elemen `.admin-main` di DOM. 
+    *   **Perbaikan:** Buat agar styling untuk `collapsed` lebih bertumpu pada class CSS dibandingkan *inline styles*. Pindahkan styling *inline* yang panjang ke dalam file CSS (misal `app/globals.css` atau CSS module khusus admin).
+    *   Pastikan transisi saat sidebar mengecil atau membesar berjalan dengan mulus (smooth transition) dan lebar konten utama (`.admin-main`) menyesuaikan secara otomatis.
 
-### 1. Standarisasi Media Queries (Persiapan CSS)
-Pertama-tama, siapkan fondasi *responsive* di dalam file CSS global agar tidak perlu membuat *inline style* terlalu rumit.
-- [ ] Buka file `app/globals.css`.
-- [ ] Tambahkan konfigurasi Media Queries standar di bagian bawah file:
-  ```css
-  /* Mobile Devices (Portrait) */
-  @media (max-width: 767px) {
-    .hide-on-mobile { display: none !important; }
-    .stack-on-mobile { flex-direction: column !important; }
-    .grid-1-on-mobile { grid-template-columns: 1fr !important; }
-    .section-padding-mobile { padding: 40px 16px !important; }
-    .hero-title-mobile { font-size: 32px !important; }
-  }
+### 2. Perbaikan Toggle Sidebar Mobile
+*   **File Tujuan:** `components/AdminMobileHeader.tsx` dan `components/AdminSidebar.tsx`
+*   **Tugas:**
+    *   Di `AdminMobileHeader.tsx`, hindari mengubah `style.transform` secara langsung via DOM (`sidebar.style.transform = ...`).
+    *   **Perbaikan:** Gunakan pendekatan penambahan/penghapusan class (misalnya class `.mobile-open`). 
+    *   Tambahkan elemen **Overlay** (lapisan gelap semi-transparan dengan `z-index` tinggi) yang muncul di belakang sidebar saat sidebar terbuka di mode mobile. Jika pengguna mengklik overlay ini, sidebar harus menutup.
+    *   Gunakan transisi CSS untuk animasi buka-tutup sidebar (`transform: translateX(-100%)` ke `translateX(0)`).
 
-  /* Tablet Devices */
-  @media (min-width: 768px) and (max-width: 1024px) {
-    .grid-2-on-tablet { grid-template-columns: repeat(2, 1fr) !important; }
-  }
-  ```
-  *(Catatan: Anda juga diizinkan mengubah inline styles menjadi kelas CSS biasa secara bertahap jika dirasa lebih baik daripada menggunakan `!important`)*.
+### 3. Responsivitas Layout & Konten Dashboard
+*   **File Tujuan:** `app/admin/dashboard/page.tsx` dan file CSS terkait.
+*   **Tugas:**
+    *   Pastikan `.admin-stats-grid` (kartu statistik) menggunakan struktur grid yang responsif:
+        *   **Desktop:** 4 kolom
+        *   **Tablet:** 2 kolom
+        *   **Mobile:** 1 kolom
+    *   Pastikan `.admin-content-grid` (Berita Terbaru dan Pesan Masuk) berubah dari 2 kolom menjadi 1 kolom di ukuran layar Tablet dan Mobile.
+    *   Sesuaikan margin, padding, dan ukuran *font* (terutama judul H1) di mobile agar tidak memakan terlalu banyak ruang. Hindari menggunakan *inline style* untuk margin dan padding besar di kontainer utama.
 
-### 2. Header & Navigasi (`components/Navbar.tsx`)
-Menu utama akan hancur jika layar terlalu kecil. Kita perlu mengimplementasikan "Hamburger Menu".
-- [ ] Implementasikan `useState` untuk mengatur state `isMobileMenuOpen` (true/false).
-- [ ] Sembunyikan tautan menu utama (Home, Layanan, dll.) jika layar berada pada resolusi mobile (`max-width: 768px`), lalu ganti dengan *icon* hamburger (garis tiga).
-- [ ] Buat *dropdown* atau *side menu* yang muncul jika *icon* hamburger diklik untuk menampilkan menu-menu tersebut.
-- [ ] Pastikan tombol "Hubungi Kami" tetap responsif atau dipindahkan ke dalam menu *hamburger* pada versi mobile.
+### 4. Standarisasi Styling (Best Practice)
+*   Kurangi penggunaan *inline styles* (`style={{ ... }}`) secara berlebihan pada komponen `AdminSidebar.tsx` dan `app/admin/dashboard/page.tsx`.
+*   Pindahkan *styling* tersebut ke file CSS agar ukuran komponen lebih ringkas dan *media queries* dapat diterapkan dengan lebih mudah.
 
-### 3. Halaman Beranda (`app/page.tsx`)
-Halaman beranda memiliki grid yang saat ini dipaksa menjadi 2 kolom (atau lebih) di *inline styles*.
-- [ ] **Hero Section:** Pastikan font judul utama menggunakan fungsi `clamp(...)` atau kelas CSS untuk mengecil di mobile. Ubah juga `flex-direction` kontainer dari horizontal menjadi vertikal pada perangkat mobile sehingga susunan teks pahlawan dan kotak statistik (50+, 5000+, dsb.) bertumpuk secara rapi.
-- [ ] **Kartu Statistik:** Pastikan grid kartu statistik beradaptasi (misalnya 1 kolom pada mobile, 2 kolom di tablet).
-- [ ] **Grid Daftar Layanan, Berita, & Partner:** Ubah definisi layout (seperti `gridTemplateColumns: "1fr 1fr"`) menjadi dinamis untuk perangkat yang lebih kecil agar jatuh menjadi vertikal (satu kolom `1fr`).
+### 5. Pengujian di Berbagai Device
+*   **Mobile (< 768px):** Header mobile terlihat, sidebar tersembunyi (bisa di-toggle), grid 1 kolom, font menyesuaikan.
+*   **Tablet (768px - 1023px):** Header desktop/mobile disesuaikan, grid menyesuaikan, perhatikan apakah sidebar sebaiknya tetap terlihat atau tidak.
+*   **Desktop (> 1024px):** Layout normal (Sidebar di kiri, konten utama di kanan). Tombol minimize sidebar berfungsi dengan baik (hanya menyisakan icon).
 
-### 4. Skalabilitas Halaman Internal (Tentang Kami, Karir, Berita, Dll)
-Banyak *padding* yang terlalu besar untuk layar HP.
-- [ ] **app/tentang-kami/page.tsx:** Ubah layout foto profil direktur dan pesannya (`flex-direction: column` untuk mobile) dan kurangi padding (misal dari `48px` menjadi `24px`).
-- [ ] **app/kontak/page.tsx:** Pada halaman kontak, buat form dan info alamat yang tadinya bersisian, menjadi bertumpuk vertikal dengan cara mengganti parameter `gridTemplateColumns` agar bersahabat dengan layar sempit.
-- [ ] Cari semua elemen yang mendefinisikan *padding* statis yang besar (contoh `padding: '100px 24px'`) dan konversikan agar responsif.
-
-### 5. Pengujian & Tweak Akhir (QA/Testing)
-- [ ] Jalankan `npm run dev`.
-- [ ] Gunakan fitur **Device Toolbar (F12)** di peramban (Chrome/Firefox/Edge) untuk melihat website pada berbagai resolusi (iPhone SE, iPad Air, dll).
-- [ ] Lakukan scroll navigasi dan buka hamburger menu, pastikan tidak ada teks yang menembus keluar layar (overflow).
+## Referensi File
+- `components/AdminSidebar.tsx`
+- `components/AdminMobileHeader.tsx`
+- `app/admin/dashboard/page.tsx`
 
 ---
-
-## Aturan Khusus (Guideline)
-1. **Pertahankan Konsep '*Glassmorphism*':** Jika terpaksa menata ulang elemen (misalnya *box padding* diperkecil), *backdrop-filter: blur* dan *background transparan* tidak boleh hilang.
-2. **Prioritaskan Keterbacaan (Legibility):** Gunakan fungsi bawaan CSS `clamp()` pada judul untuk memastikan ukuran responsif yang luwes antara PC dan Mobile.
-3. **Penyatuan (Consistency):** Utamakan penambahan tag class (`className="stack-on-mobile"`) ke elemen-elemen yang sudah ada, ketimbang menulis script JavaScript rumit untuk mendeteksi `window.innerWidth`.
+*Catatan untuk Programmer:* Jika membutuhkan state global untuk status sidebar, pertimbangkan untuk menggunakan React Context atau Zustand agar `AdminMobileHeader` dan `AdminSidebar` bisa berkomunikasi tanpa memanipulasi DOM secara langsung.

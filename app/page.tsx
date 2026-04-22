@@ -80,6 +80,7 @@ export default function Home() {
           className="object-cover" 
           priority
           style={{ zIndex: -1, opacity: 1 }}
+          sizes="100vw"
         />
         <div style={{ position: "absolute", inset: 0, opacity: 0.06, backgroundImage: "radial-gradient(white 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
         <div style={{ position: "absolute", top: "10%", right: "5%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(209,44,44,0.08) 0%, transparent 70%)" }} />
@@ -149,7 +150,8 @@ export default function Home() {
                   height={60} 
                   className="partner-logo-img"
                   style={{ 
-                    transition: "all 0.3s ease" 
+                    transition: "all 0.3s ease",
+                    height: "auto"
                   }}
                   onMouseOver={(e) => (e.currentTarget.style.filter = "grayscale(0) brightness(1) opacity(1)")}
                   onMouseOut={(e) => (e.currentTarget.style.filter = "grayscale(1) brightness(1.2) opacity(0.4)")}
@@ -181,6 +183,7 @@ export default function Home() {
                     alt={s.title} 
                     fill 
                     className="object-cover transition-transform duration-500 hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
                   />
                 </div>
                 <div style={{ padding: "24px 28px 28px", flex: 1, display: "flex", flexDirection: "column" }}>
@@ -198,7 +201,7 @@ export default function Home() {
       {/* News Section */}
       <section className="section" style={{ background: "var(--neutral-100)" }}>
         <div className="container">
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48, gap: 24, flexWrap: "wrap" }} className="stack-on-mobile text-center-mobile">
+          <div style={{ marginBottom: 48 }} className="text-center-mobile">
             <div>
               <div className="eyebrow-container">
                 <div className="eyebrow-line" />
@@ -207,7 +210,6 @@ export default function Home() {
               <h2 style={{ marginBottom: 8 }}>Berita Paripurna & TJSL</h2>
               <p>Agenda dan aksi kepedulian terbaru PT. Tangguh Jaya Semesta.</p>
             </div>
-            <Link href="/berita" className="btn" style={{ border: "1.5px solid var(--primary-blue)", color: "var(--primary-blue)", fontSize: 13 }}>Lihat Semua →</Link>
           </div>
           
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 24 }}>
@@ -219,6 +221,7 @@ export default function Home() {
                     alt={n.title} 
                     fill 
                     className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
                   <div className="news-card-overlay" />
                   <div className="news-card-tag">
@@ -232,6 +235,10 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: 40 }}>
+            <Link href="/berita" className="btn" style={{ border: "1.5px solid var(--primary-blue)", color: "var(--primary-blue)", fontSize: 13 }}>Lihat Semua →</Link>
           </div>
         </div>
       </section>

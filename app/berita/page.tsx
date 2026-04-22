@@ -33,6 +33,7 @@ function SubHero({ eyebrow, title, subtitle }: { eyebrow: string, title: string,
         fill 
         className="object-cover"
         style={{ zIndex: -1, opacity: 1 }}
+        sizes="100vw"
       />
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, var(--primary-blue), var(--accent-red), var(--primary-blue))" }} />
       <div style={{ position: "absolute", top: -80, right: -80, width: 360, height: 360, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.05)" }} />
@@ -69,6 +70,7 @@ export default function Berita() {
                     alt={n.title} 
                     fill 
                     className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="news-card-overlay" />
                   <div className="news-card-tag">

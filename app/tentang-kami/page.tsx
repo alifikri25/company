@@ -102,10 +102,11 @@ export default function TentangKami() {
             </div>
           </div>
           
-          <div>
-            <Eyebrow text="Misi Kami" />
+          <div style={{ textAlign: "center" }}>
+            <Eyebrow text="Misi" />
             <h2 style={{ fontSize: 28, marginBottom: 32 }}>Komitmen Kami</h2>
-            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {[
                 { n: "01", text: "Optimalisasi kepuasan pelanggan lewat", highlight: "Zero-Downtime Guarantee." },
                 { n: "02", text: "Pemanfaatan SDM tersertifikasi", highlight: "ISO Internasional." },
@@ -117,17 +118,16 @@ export default function TentangKami() {
                 </div>
               ))}
             </div>
-          </div>
         </div>
       </section>
 
       <section className="section bg-white">
-        <div className="container" style={{ maxWidth: 800 }}>
+        <div className="container" style={{ maxWidth: 800, textAlign: "center" }}>
           <Eyebrow text="Jajaran Eksekutif" />
           <h2 style={{ fontSize: 28, marginBottom: 12 }}>Manajemen Perusahaan</h2>
           <p style={{ marginBottom: 40 }}>Dipimpin oleh talenta-talenta terbaik bangsa dengan Good Corporate Governance premium.</p>
           
-          <div className="stack-on-mobile" style={{ background: "white", border: "1.5px solid var(--neutral-200)", borderLeft: "4px solid var(--primary-blue)", borderRadius: 20, padding: "32px 24px", display: "flex", alignItems: "flex-start", gap: 28, boxShadow: "var(--shadow-md)" }}>
+          <div className="stack-on-mobile" style={{ background: "white", border: "1.5px solid var(--neutral-200)", borderLeft: "4px solid var(--primary-blue)", borderRadius: 20, padding: "32px 24px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "left", gap: 28, boxShadow: "var(--shadow-md)", margin: "0 auto" }}>
             <div style={{ width: 72, height: 72, borderRadius: 16, background: "var(--neutral-100)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "var(--primary-blue)" }}>
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
