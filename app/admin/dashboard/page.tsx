@@ -1,6 +1,6 @@
 import { getStatistik, getSemuaBerita, getSemuaPesan } from '@/app/actions/berita'
-import AdminSidebar from '@/components/AdminSidebar'
 import Link from 'next/link'
+import { Newspaper, Briefcase, Mail, Bell, ArrowRight } from 'lucide-react'
 
 export default async function AdminDashboard() {
   const stats = await getStatistik()
@@ -8,80 +8,76 @@ export default async function AdminDashboard() {
   const pesanTerbaru = await getSemuaPesan()
 
   return (
-    <main style={{ display: 'flex', minHeight: '100vh', background: '#f4f6f8' }}>
-      <AdminSidebar />
-      <div style={{ marginLeft: 260, flex: 1, padding: '40px 40px' }}>
-        <div style={{ marginBottom: 32 }}>
-          <h1 style={{ fontSize: 28, color: 'var(--primary-blue)', marginBottom: 4 }}>Dashboard</h1>
-          <p style={{ color: 'var(--muted-blue)', fontSize: 15 }}>Selamat datang di Panel Administrasi PT. Tangguh Jaya Semesta</p>
-        </div>
+    <>
+      <header className="center-content-non-desktop" style={{ marginBottom: 32 }}>
+        <h1 style={{ fontSize: 24, fontWeight: 700, color: 'var(--primary-blue)', letterSpacing: '-0.02em' }}>Dashboard</h1>
+      </header>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20, marginBottom: 36 }}>
-          {[
-            { label: 'Total Berita', value: stats.totalBerita, icon: '📰', color: '#152673' },
-            { label: 'Lowongan Aktif', value: stats.totalKarir, icon: '💼', color: '#0d8a4a' },
-            { label: 'Total Pesan', value: stats.totalPesan, icon: '📩', color: '#2563eb' },
-            { label: 'Pesan Baru', value: stats.pesanBaru, icon: '🔔', color: '#d12c2c' },
-          ].map((s, i) => (
-            <div key={i} style={{
-              background: 'white', borderRadius: 16, padding: '28px 24px',
-              border: '1px solid #e8ecf0',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                <div>
-                  <p style={{ fontSize: 13, color: 'var(--muted-blue)', marginBottom: 8, fontWeight: 600 }}>{s.label}</p>
-                  <p style={{ fontSize: 36, fontWeight: 800, color: s.color, fontFamily: 'var(--font-display)' }}>{s.value}</p>
-                </div>
-                <span style={{ fontSize: 32 }}>{s.icon}</span>
+      <div className="admin-stats-grid">
+        {[
+          { label: 'Total Berita', value: stats.totalBerita, icon: Newspaper, color: '#3b82f6' },
+          { label: 'Lowongan Aktif', value: stats.totalKarir, icon: Briefcase, color: '#10b981' },
+          { label: 'Total Pesan', value: stats.totalPesan, icon: Mail, color: '#6366f1' },
+          { label: 'Pesan Baru', value: stats.pesanBaru, icon: Bell, color: '#ef4444' },
+        ].map((s, i) => (
+          <div key={i} className="admin-card center-content-non-desktop" style={{ padding: '24px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }} className="center-content-non-desktop">
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: `${s.color}10`, color: s.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <s.icon size={24} />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column' }} className="stats-info">
+                <p style={{ fontSize: 13, fontWeight: 500, color: '#64748b', marginBottom: 2 }}>{s.label}</p>
+                <p style={{ fontSize: 24, fontWeight: 700, color: '#1e293b' }}>{s.value}</p>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
-          <div style={{
-            background: 'white', borderRadius: 16, border: '1px solid #e8ecf0',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.04)', overflow: 'hidden'
-          }}>
-            <div style={{ padding: '20px 24px', borderBottom: '1px solid #e8ecf0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h3 style={{ fontSize: 16, color: 'var(--primary-blue)' }}>Berita Terbaru</h3>
-              <Link href="/admin/dashboard/berita" style={{ fontSize: 13, color: 'var(--accent-red)', fontWeight: 600, textDecoration: 'none' }}>Lihat Semua →</Link>
-            </div>
-            {beritaTerbaru.slice(0, 4).map(b => (
-              <div key={b.id} style={{ padding: '16px 24px', borderBottom: '1px solid #f0f2f5' }}>
-                <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>{b.judul}</p>
-                <span style={{ fontSize: 12, color: 'var(--muted-blue)' }}>{b.tanggal.toLocaleDateString('id-ID')}</span>
+      <div className="admin-content-grid">
+        <div className="admin-card" style={{ overflow: 'hidden' }}>
+          <div className="center-content-non-desktop" style={{ padding: '16px 20px', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
+            <h3 style={{ fontSize: 14, fontWeight: 600, color: '#1e293b' }}>Berita Terbaru</h3>
+            <Link href="/admin/dashboard/berita" style={{ fontSize: 12, color: 'var(--primary-blue)', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
+              Manage <ArrowRight size={14} />
+            </Link>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {beritaTerbaru.slice(0, 5).map(b => (
+              <div key={b.id} style={{ padding: '12px 20px', borderBottom: '1px solid #f8fafc', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className="center-content-non-desktop">
+                <span style={{ fontSize: 13, color: '#334155', fontWeight: 500 }}>{b.judul}</span>
+                <span style={{ fontSize: 11, color: '#94a3b8' }}>{b.tanggal.toLocaleDateString('id-ID')}</span>
               </div>
             ))}
             {beritaTerbaru.length === 0 && (
-              <div style={{ padding: '40px 24px', textAlign: 'center', color: 'var(--muted-blue)', fontSize: 14 }}>Belum ada berita</div>
+              <div style={{ padding: '32px', textAlign: 'center', color: '#94a3b8', fontSize: 13 }}>No news items yet</div>
             )}
           </div>
+        </div>
 
-          <div style={{
-            background: 'white', borderRadius: 16, border: '1px solid #e8ecf0',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.04)', overflow: 'hidden'
-          }}>
-            <div style={{ padding: '20px 24px', borderBottom: '1px solid #e8ecf0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h3 style={{ fontSize: 16, color: 'var(--primary-blue)' }}>Pesan Masuk Terbaru</h3>
-              <Link href="/admin/dashboard/pesan" style={{ fontSize: 13, color: 'var(--accent-red)', fontWeight: 600, textDecoration: 'none' }}>Lihat Semua →</Link>
-            </div>
-            {pesanTerbaru.slice(0, 4).map(p => (
-              <div key={p.id} style={{ padding: '16px 24px', borderBottom: '1px solid #f0f2f5', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 2 }}>{p.nama}</p>
-                  <p style={{ fontSize: 12, color: 'var(--muted-blue)' }}>{p.subjek}</p>
+        <div className="admin-card" style={{ overflow: 'hidden' }}>
+          <div className="center-content-non-desktop" style={{ padding: '16px 20px', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
+            <h3 style={{ fontSize: 14, fontWeight: 600, color: '#1e293b' }}>Recent Messages</h3>
+            <Link href="/admin/dashboard/pesan" style={{ fontSize: 12, color: 'var(--primary-blue)', fontWeight: 600, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4 }}>
+              Inbox <ArrowRight size={14} />
+            </Link>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {pesanTerbaru.slice(0, 5).map(p => (
+              <div key={p.id} style={{ padding: '12px 20px', borderBottom: '1px solid #f8fafc', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className="center-content-non-desktop">
+                <div style={{ display: 'flex', flexDirection: 'column' }} className="stats-info">
+                  <p style={{ fontSize: 13, color: '#334155', fontWeight: 600 }}>{p.nama}</p>
+                  <p style={{ fontSize: 11, color: '#64748b' }}>{p.subjek}</p>
                 </div>
-                {!p.dibaca && <span style={{ fontSize: 10, background: 'var(--accent-red)', color: 'white', padding: '3px 8px', borderRadius: 20, fontWeight: 700 }}>Baru</span>}
+                {!p.dibaca && <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#ef4444' }}></span>}
               </div>
             ))}
             {pesanTerbaru.length === 0 && (
-              <div style={{ padding: '40px 24px', textAlign: 'center', color: 'var(--muted-blue)', fontSize: 14 }}>Belum ada pesan masuk</div>
+              <div style={{ padding: '32px', textAlign: 'center', color: '#94a3b8', fontSize: 13 }}>Inbox is empty</div>
             )}
           </div>
         </div>
       </div>
-    </main>
+    </>
   )
 }
